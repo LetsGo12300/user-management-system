@@ -26,10 +26,10 @@ MongoClient.connect(
     app.get('/', (req, res) => {
       db.collection('users').find().toArray()
         .then((results) => {
-          console.log(results);
+          res.render('index.ejs', {users: results})
         })
         .catch(error => console.error(error))
-      res.sendFile(path.join(__dirname, '/public', '/index.html'));
+      // res.sendFile(path.join(__dirname, '/public', '/index.html'));
     });
 
     app.post('/users', (req, res) => {
