@@ -4,21 +4,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
     <title>User Management System</title>
   </head>
   <body>
     <h1>Users</h1>
-    <ul>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
         <% users.forEach(function(user){ %>
-            <li>
-               <%= user.name %>                            
-            </li>
+            <tr>
+                <td><%= user.name %></td>
+                <td>Email</td>
+                <td>Role</td>
+                <td>Status</td>
+                <td>
+                    <input type="button" onclick="location.href='/users/<%=user._id%>';" value="Edit" />
+                </td>                         
+            </tr>
          <% }); %>
-    </ul>
+    </table>
+       
     <h2>Create User</h2>
     <form action="/users" method="POST">
       <label for="name">Name:</label>
-      <input type="text" placeholder="name" name="name" />
+      <input type="text" placeholder="name" name="name" id="name"/>
       <button type="submit">Create user</button>
     </form>
   </body>

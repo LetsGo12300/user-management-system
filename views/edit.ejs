@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
     <title>User Management System</title>
   </head>
   <body>
-    <h1>Users</h1>
-
-    <h2>Create User</h2>
-    <form action="/users" method="POST">
+    <a href="/">Back to page</a>
+    <h1>Edit User</h1>
       <label for="name">Name:</label>
-      <input type="text" placeholder="name" name="name" />
-      <button type="submit">Create user</button>
-    </form>
+      <input type="text" placeholder="name" name="name" id="name" value="<%= user.name %>" />
+      <button id="save-btn">Save</button>
+
+    <script src="/main.js"></script>
   </body>
 </html>

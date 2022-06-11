@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const MongoClient = require('mongodb').MongoClient;
+const { ObjectId } = require('mongodb');
 const app = express();
 
 const PORT = 3000;
@@ -11,6 +12,8 @@ const PORT = 3000;
 app.set('view engine', 'ejs')
 
 // middleware - body parser
+app.use(express.static('public'))
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join(__dirname, '/favicon.ico')));
 
@@ -25,13 +28,13 @@ MongoClient.connect(
 
     app.get('/', (req, res) => {
       db.collection('users').find().toArray()
-        .then((results) => {
-          res.render('index.ejs', {users: results})
+        .then((response) => {
+          res.render('index.ejs', {users: response})
         })
         .catch(error => console.error(error))
-      // res.sendFile(path.join(__dirname, '/public', '/index.html'));
     });
 
+    // Create user
     app.post('/users', (req, res) => {
       users.insertOne(req.body)
         .then(() => {
@@ -40,9 +43,26 @@ MongoClient.connect(
         })
         .catch((error) => console.error(error));
     });
+
+    // Edit user route + form
+    app.get('/users/:id', (req, res) => {
+      users.findOne({_id: ObjectId(req.params.id)})
+        .then((response) => {
+          res.render('edit.ejs', {user: response})
+        })
+    })
+
+    // Accepting PUT request after editing user
+    app.put('/update', (req, res) => {
+      users.updateOne({_id: ObjectId(req.body._id)}, {$set: {name: req.body.name}})
+        .then(() => {
+          res.status(200)
+        })
+        .catch(error => console.error(error))
+    })
   })
   .catch(console.error);
 
 app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
+  console.log(`App listening on port http://localhost:${PORT}`);
 });
