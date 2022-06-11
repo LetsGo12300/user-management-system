@@ -7,6 +7,9 @@ const app = express();
 
 const PORT = 3000;
 
+// set EJS as template engine
+app.set('view engine', 'ejs')
+
 // middleware - body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join(__dirname, '/favicon.ico')));
