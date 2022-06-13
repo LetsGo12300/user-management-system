@@ -64,9 +64,21 @@ MongoClient.connect(
 
     app.delete('/api/delete/:id', (req, res) => {
       users.deleteOne({_id: ObjectId(req.params.id)})
-        .then(() => {
-          res.send({
-            message: "User deleted!"
+        .then((data) => {
+          console.log(data)
+          if (data.deletedCount !== 1){
+            res.status(404).send({
+              message: `User with ID ${req.params.id} not found`
+            })
+          } else {
+            res.send({
+              message: "User deleted!"
+            })
+          }
+        })
+        .catch(() => {
+          res.status(500).send({
+            message: `Internal server error. Could not delete user with id ${req.params.id}`
           })
         })
     })

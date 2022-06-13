@@ -18,7 +18,7 @@
             <th>Action</th>
         </tr>
         <% users.forEach(function(user){ %>
-            <tr>
+            <tr tr-id=<%=user._id%>>
                 <td><%= user.name %></td>
                 <td>Email</td>
                 <td>Role</td>
