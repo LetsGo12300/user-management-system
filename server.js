@@ -17,6 +17,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(favicon(path.join(__dirname, '/favicon.ico')));
 
+const roles = [
+  'Administrator',
+  'Primary Owner',
+  'Editor',
+  'Viewer'
+];
+
 MongoClient.connect(
   'mongodb+srv://m001-student:m001-mongodb-basics@sandbox.53gsr.mongodb.net/?retryWrites=true&w=majority',
   { useUnifiedTopology: true }
@@ -30,14 +37,21 @@ MongoClient.connect(
     app.get('/', (req, res) => {
       db.collection('users').find().toArray()
         .then((response) => {
-          res.render('index.ejs', {users: response})
+          res.render('index.ejs', {users: response, roles: roles})
         })
         .catch(error => console.error(error))
     });
 
     // Create user
     app.post('/api/users', (req, res) => {
-      users.insertOne(req.body)
+      const newUser = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
+        status: req.body.status
+      };
+      
+      users.insertOne(newUser)
         .then(() => {
           console.log('User successfully created');
           res.redirect('/');
@@ -51,7 +65,7 @@ MongoClient.connect(
         .then((data) => {
           if (!data){
             res.status(404).send('Error. User ID not found~')
-          } else res.render('edit.ejs', {user: data})
+          } else res.render('edit.ejs', {user: data, roles: roles})
         })
         .catch(() => {
           res.status(500).send({
@@ -62,7 +76,14 @@ MongoClient.connect(
 
     // Update user
     app.put('/api/update/:id', (req, res) => {
-      users.updateOne({_id: ObjectId(req.params.id)}, {$set: {name: req.body.name}})
+      const newUser = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role,
+        status: req.body.status
+      };
+
+      users.updateOne({_id: ObjectId(req.params.id)}, {$set: newUser})
         .then(() => {
           res.status(200).send({
             message: "User updated"

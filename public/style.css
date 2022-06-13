@@ -10,3 +10,12 @@ table, td, th{
 td{
     padding: 0.3rem;
 }
+
+form.create-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-btn{
+    width: fit-content;
+}

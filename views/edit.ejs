@@ -10,10 +10,47 @@
   <body>
     <a href="/">Back to page</a>
     <h1>Edit User</h1>
-      <label for="name">Name:</label>
-      <input type="text" placeholder="name" name="name" id="name" value="<%= user.name %>" required/>
-      <button id="save-btn">Save</button>
+    <div>
+      <div class="form-row">
+        <p><label for="name">Name:</label></p>
+        <input type="text" placeholder="Enter name" name="name" id="name" value="<%= user.name %>" required/>
+      </div>
 
+      <div class="form-row">
+        <p><label for="email">E-mail address:</label></p>
+        <input type="email" placeholder="Enter e-mail address" name="email" id="email" value="<%= user.email %>" required/>
+      </div>
+
+      <div class="form-row">
+        <p><label for="role">Select role:</label></p>
+        <select class="select-role" id="role" name="role" required>
+          <% roles.forEach(function(role){ %>
+            <% if(role === user.role) { %> 
+              <option value="<%= role%>" selected><%= role%></option>
+            <% } else { %>
+              <option value="<%= role%>"><%= role%></option>
+            <% } %>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <p>Select status:</p>
+        <% if(user.status === 'true') { %>
+          <input type="radio" id="enabled" name="status" value="true" checked="true" required>
+          <label for="enabled">Enabled</label><br>
+          <input type="radio" id="disabled" name="status" value="false">
+          <label for="disabled">Disabled</label><br>
+        <% } else { %>
+          <input type="radio" id="enabled" name="status" value="true" required>
+          <label for="enabled">Enabled</label><br>
+          <input type="radio" id="disabled" name="status" value="false" checked="true">
+          <label for="disabled">Disabled</label><br>
+        <% } %>
+      </div>
+
+      <button id="save-btn">Save</button>
+    </div>
     <script src="/edit.js"></script>
   </body>
 </html>
