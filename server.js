@@ -48,8 +48,15 @@ MongoClient.connect(
     // Read user and pre-fill form for updating
     app.get('/users/:id', (req, res) => {
       users.findOne({_id: ObjectId(req.params.id)})
-        .then((response) => {
-          res.render('edit.ejs', {user: response})
+        .then((data) => {
+          if (!data){
+            res.status(404).send('Error. User ID not found~')
+          } else res.render('edit.ejs', {user: data})
+        })
+        .catch(() => {
+          res.status(500).send({
+            message: `Internal server error. Could not find user with id ${req.params.id}`
+          })
         })
     })
 
