@@ -19,3 +19,11 @@ deleteButtons.forEach(deleteButton => {
         })
     })
 });
+
+document.querySelectorAll('td').forEach(td => {
+    td.classList.add('align-middle')
+})
+
+document.querySelectorAll('tr').forEach(tr => {
+    tr.classList.add('text-center')
+})

@@ -4,17 +4,22 @@
     font-family: 'Roboto', sans-serif;
 }
 
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content-container{
+    padding: 20px;
+}
+
 li{
     list-style-type: none;
-}
-
-table, td, th{
-    border: 1px solid;
-    border-collapse: collapse;
-}
-
-td{
-    padding: 0.3rem;
 }
 
 form.create-form{
@@ -22,6 +27,41 @@ form.create-form{
     flex-direction: column;
 }
 
+.btn{
+    margin: 2px;
+}
+
 .submit-btn{
     width: fit-content;
+    margin-top: 15px;
+}
+
+#save-btn{
+    margin-top: 15px;
+}
+
+.users-table{
+    margin: 10px 100px;
+}
+
+.footer{
+    text-align: center;
+    padding: 0.5rem;
+}
+
+@media (max-width: 992px){
+    .users-table{
+        margin: 10px 25px;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 576px){
+    .users-table{
+        margin: 10px 5px;
+    }
+
+    th, td{
+        font-size: 0.8rem;
+    }
 }

@@ -1,15 +1,19 @@
 <%- include('./partials/header') %> 
-
+  <div class="content-container">
     <h1>Users</h1>
-    <table>
-        <tr>
+    <div class="users-table">
+      <table class="table table-bordered table-hover">
+        <thead class="table-secondary">
+          <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
-        <% users.forEach(function(user){ %>
+        </thead>
+        <tbody>
+          <% users.forEach(function(user){ %>
             <tr tr-id=<%=user._id%>>
                 <td><%= user.name %></td>
                 <td><%= user.email %></td>
@@ -18,12 +22,15 @@
                   <%= user.status === 'true' ? 'Enabled': 'Disabled' %> 
                 </td>
                 <td>
-                    <input type="button" onclick="location.href='/users/<%=user._id%>';" value="Edit" />
-                    <input type="button" class="delete-btn" data-id=<%=user._id%> value="Delete" />
+                    <input type="button" class="btn btn-light btn-outline-dark btn-sm" onclick="location.href='/users/<%=user._id%>';" value="Edit" />
+                    <input type="button" class="btn btn-light btn-outline-dark delete-btn btn-sm" data-id=<%=user._id%> value="Delete" />
                 </td>                       
             </tr>
          <% }); %>
-    </table>
+        </tbody>
+      </table>
+    </div>
+    
        
     <h2>Create User</h2>
     <form class="create-form" action="/api/users" method="POST">
@@ -54,8 +61,10 @@
         <label for="disabled">Disabled</label><br>  
       </div>
 
-      <button class="submit-btn" type="submit">Create user</button>
+      <button class="btn btn-dark submit-btn" type="submit">Create user</button>
     </form>
+  </div>
+    
 
     <script src="/main.js"></script>
   </body>
