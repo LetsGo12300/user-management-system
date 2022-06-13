@@ -54,18 +54,23 @@ MongoClient.connect(
     })
 
     // Update user
-    app.put('/api/update', (req, res) => {
-      users.updateOne({_id: ObjectId(req.body._id)}, {$set: {name: req.body.name}})
+    app.put('/api/update/:id', (req, res) => {
+      users.updateOne({_id: ObjectId(req.params.id)}, {$set: {name: req.body.name}})
         .then(() => {
-          res.status(200)
+          res.status(200).send({
+            message: "User updated"
+          })
         })
-        .catch(error => console.error(error))
+        .catch(() => {
+          res.status(500).send({
+            message: `Internal server error. Could not update user with id ${req.params.id}`
+          })
+        })
     })
 
     app.delete('/api/delete/:id', (req, res) => {
       users.deleteOne({_id: ObjectId(req.params.id)})
         .then((data) => {
-          console.log(data)
           if (data.deletedCount !== 1){
             res.status(404).send({
               message: `User with ID ${req.params.id} not found`
