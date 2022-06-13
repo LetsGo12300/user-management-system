@@ -25,16 +25,19 @@
                 <td>Status</td>
                 <td>
                     <input type="button" onclick="location.href='/users/<%=user._id%>';" value="Edit" />
-                </td>                         
+                    <input type="button" class="delete-btn" data-id=<%=user._id%> value="Delete" />
+                </td>                       
             </tr>
          <% }); %>
     </table>
        
     <h2>Create User</h2>
-    <form action="/users" method="POST">
+    <form action="/api/users" method="POST">
       <label for="name">Name:</label>
-      <input type="text" placeholder="name" name="name" id="name"/>
+      <input type="text" placeholder="name" name="name" id="name" required/>
       <button type="submit">Create user</button>
     </form>
+
+    <script src="/main.js"></script>
   </body>
 </html>

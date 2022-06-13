@@ -1,15 +1,13 @@
-const saveButton = document.getElementById('save-btn');
+const deleteButtons = document.querySelectorAll('.delete-btn');
 
-saveButton.addEventListener('click', () => {
-    const urlSplit = window.location.href.split('/');
-    const name = document.getElementById('name').value;
-    
-    fetch('/update', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            name: name,
-            _id: urlSplit[urlSplit.length - 1]
+deleteButtons.forEach(deleteButton => {
+    deleteButton.addEventListener('click', () => {
+        let userID = deleteButton.getAttribute('data-id');
+        fetch(`/api/delete/${userID}`,{
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
         })
+        .then(response => response.json())
+        .then(data => console.log(data.message))
     })
 });

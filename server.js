@@ -26,6 +26,7 @@ MongoClient.connect(
     const db = client.db('user-management-system');
     const users = db.collection('users');
 
+    // Read users
     app.get('/', (req, res) => {
       db.collection('users').find().toArray()
         .then((response) => {
@@ -35,7 +36,7 @@ MongoClient.connect(
     });
 
     // Create user
-    app.post('/users', (req, res) => {
+    app.post('/api/users', (req, res) => {
       users.insertOne(req.body)
         .then(() => {
           console.log('User successfully created');
@@ -44,7 +45,7 @@ MongoClient.connect(
         .catch((error) => console.error(error));
     });
 
-    // Edit user route + form
+    // Read user and pre-fill form for updating
     app.get('/users/:id', (req, res) => {
       users.findOne({_id: ObjectId(req.params.id)})
         .then((response) => {
@@ -52,13 +53,22 @@ MongoClient.connect(
         })
     })
 
-    // Accepting PUT request after editing user
-    app.put('/update', (req, res) => {
+    // Update user
+    app.put('/api/update', (req, res) => {
       users.updateOne({_id: ObjectId(req.body._id)}, {$set: {name: req.body.name}})
         .then(() => {
           res.status(200)
         })
         .catch(error => console.error(error))
+    })
+
+    app.delete('/api/delete/:id', (req, res) => {
+      users.deleteOne({_id: ObjectId(req.params.id)})
+        .then(() => {
+          res.send({
+            message: "User deleted!"
+          })
+        })
     })
   })
   .catch(console.error);
