@@ -23,31 +23,52 @@ li{
     list-style-type: none;
 }
 
-form.create-form{
-    display: flex;
-    flex-direction: column;
-    max-width: 450px;
+.section-title{
+    font-weight: bold;
 }
 
-div.edit-form{
+.create-user-section{
+    margin: 50px 10px;
     max-width: 650px;
 }
 
-.form-row>p{
-    margin: 0;
+.edit-user-section{
+    height: 100%;
 }
 
-.btn{
-    margin: 2px;
+form.create-form, div.edit-form{
+    background-color: #e6e6e6;
+    border-radius: 15px;
+}
+
+form.create-form{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.edit{
+    margin-top: 100px;
+    margin-bottom: 15px;
+}
+
+div.edit-form{
+    padding: 30px;
+    margin: auto;
+    max-width: 850px;
+    height: fit-content;
 }
 
 .submit-btn{
-    width: fit-content;
+    min-width: 200px;
     margin-top: 15px;
+    float: right;
 }
 
 #save-btn{
-    margin-top: 15px;
+    min-width: 200px;
+    margin-top: 40px;
 }
 
 .users-table{
@@ -64,6 +85,10 @@ div.edit-form{
         margin: 10px 25px;
         overflow-x: auto;
     }
+
+    .edit{
+        margin-top: 70px;
+    }
 }
 
 @media (max-width: 576px){
@@ -73,5 +98,13 @@ div.edit-form{
 
     th, td{
         font-size: 0.8rem;
+    }
+
+    .submit-btn{
+        min-width: 100px;
+    }
+
+    .edit{
+        margin-top: 50px;
     }
 }

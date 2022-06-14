@@ -1,7 +1,11 @@
 <%- include('./partials/header') %> 
   <div class="content-container">
     <section class="view-users-section">
-      <h4 class="section-title">Users</h4>
+      <h4 class="section-title d-inline-block me-2">Users</h4>
+      <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Add
+      </button>
+
       <div class="users-table">
         <table class="table table-bordered table-hover">
           <thead class="table-secondary">
@@ -32,59 +36,61 @@
         </table>
       </div>
     </section>
-    <br>
-    <section class="create-user-section">
-      <h4 class="section-title">Create User</h4>
-      <form class="create-form" action="/api/users" method="POST">
-        <div class="form-row row mb-3">
-          <label class="form-label col-form-label col-4" for="name">Name:</label>
-          <div class="col">
-            <input class="form-control" type="text" placeholder="Enter name" name="name" id="name" required/>
-          </div>
-        </div>
-
-        <div class="form-row row mb-3">
-          <label class="form-label col-form-label col-4" for="email">E-mail address:</label>
-          <div class="col">
-            <input class="form-control" type="email" placeholder="Enter e-mail address" name="email" id="email" required/>
-          </div>
-        </div>
-
-        <div class="form-row row mb-3">
-          <label class="form-label col-form-label col-4" for="role">Select role:</label>
-          <div class="col">
-            <select class="form-select select-role" id="role" name="role" required>
-              <option disabled selected value="">Select a role...</option>
-              <% roles.forEach(function(role){ %>
-                <option value="<%= role%>"><%= role%></option>
-              <% }) %>
-            </select>
-          </div>
-          
-        </div>
-
-        <div class="form-row row">
-          <div class="col-4">Select status:</div>
-          <div class="col align-middle">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="enabled" name="status" value="true" required>
-              <label class="form-check-label" for="enabled">Enabled</label><br>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="disabled" name="status" value="false">
-              <label class="form-check-label" for="disabled">Disabled</label><br>  
-            </div>
-          </div>
-          
-        </div>
-
-        <button class="btn btn-dark submit-btn" type="submit">Create user</button>
-      </form>
-    </section>
     
+    <div class="collapse" id="collapseExample">
+      <section class="create-user-section">
+        <h4 class="section-title">Create New User</h4>
+        <form class="create-form" action="/api/users" method="POST">
+          <div class="form-row row mb-3">
+            <label class="form-label col-form-label col-3" for="name">Name:</label>
+            <div class="col">
+              <input class="form-control" type="text" placeholder="Enter name" name="name" id="name" required/>
+            </div>
+          </div>
+  
+          <div class="form-row row mb-3">
+            <label class="form-label col-form-label col-3" for="email">E-mail address:</label>
+            <div class="col">
+              <input class="form-control" type="email" placeholder="Enter e-mail address" name="email" id="email" required/>
+            </div>
+          </div>
+  
+          <div class="form-row row mb-3">
+            <label class="form-label col-form-label col-3" for="role">Select role:</label>
+            <div class="col">
+              <select class="form-select select-role" id="role" name="role" required>
+                <option disabled selected value="">Select a role...</option>
+                <% roles.forEach(function(role){ %>
+                  <option value="<%= role%>"><%= role%></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+  
+          <div class="form-row row">
+            <div class="col-3">Select status:</div>
+            <div class="col align-middle">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="enabled" name="status" value="true" required>
+                <label class="form-check-label" for="enabled">Enabled</label><br>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="disabled" name="status" value="false">
+                <label class="form-check-label" for="disabled">Disabled</label><br>  
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <button class="btn btn-dark submit-btn" type="submit">Create</button>
+          </div>
+        </form>
+      </section>
+    </div>
   </div>
     
     <script src="/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   </body>
 </html>
 

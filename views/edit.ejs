@@ -2,7 +2,8 @@
   <div class="content-container">
     <section class="edit-user-section">
       <a href="/">Back to page</a>
-      <h4 class="section-title">Edit User</h4>
+      
+      <h4 style="text-align: center" class="section-title edit">Edit User</h4>
       <div class="edit-form">
         <div class="form-row row mb-3">
           <label class="form-label col-form-label col-4" for="name">Name:</label>
@@ -35,30 +36,31 @@
   
         <div class="form-row row">
           <div class="col-4">Select status:</div>
-          <div class="col">
+          <div class="col align-middle">
             <% if(user.status === 'true') { %>
               <div class="form-check form-check-inline">
-                <input type="radio" id="enabled" name="status" value="true" checked="true" required>
-                <label for="enabled">Enabled</label>
+                <input class="form-check-input" type="radio" id="enabled" name="status" value="true" checked="true" required>
+                <label class="form-check-label" for="enabled">Enabled</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" id="disabled" name="status" value="false">
-                <label for="disabled">Disabled</label>
+                <input class="form-check-input" type="radio" id="disabled" name="status" value="false">
+                <label class="form-check-label" for="disabled">Disabled</label>
               </div>
             <% } else { %>
-              <div class="form-check form-check-inline"></div>
-                <input type="radio" id="enabled" name="status" value="true" required>
-                <label for="enabled">Enabled</label>
               <div class="form-check form-check-inline">
-                <input type="radio" id="disabled" name="status" value="false" checked="true">
-                <label for="disabled">Disabled</label>
+                <input class="form-check-input" type="radio" id="enabled" name="status" value="true" required>
+                <label class="form-check-label" for="enabled">Enabled</label>
               </div>
-              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="disabled" name="status" value="false" checked="true">
+                <label class="form-check-label" for="disabled">Disabled</label>
+              </div>
             <% } %>
           </div>
         </div>
-  
-        <button id="save-btn" class="btn btn-dark">Save</button>
+        <div style="text-align: center">
+          <button id="save-btn" class="btn btn-dark">Save</button>
+        </div>
       </div>
     </section>
 
