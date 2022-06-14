@@ -1,48 +1,67 @@
 <%- include('./partials/header') %> 
   <div class="content-container">
-    <a href="/">Back to page</a>
-    <h1>Edit User</h1>
-    <div>
-      <div class="form-row">
-        <p><label for="name">Name:</label></p>
-        <input type="text" placeholder="Enter name" name="name" id="name" value="<%= user.name %>" required/>
-      </div>
-
-      <div class="form-row">
-        <p><label for="email">E-mail address:</label></p>
-        <input type="email" placeholder="Enter e-mail address" name="email" id="email" value="<%= user.email %>" required/>
-      </div>
-
-      <div class="form-row">
-        <p><label for="role">Select role:</label></p>
-        <select class="select-role" id="role" name="role" required>
-          <% roles.forEach(function(role){ %>
-            <% if(role === user.role) { %> 
-              <option value="<%= role%>" selected><%= role%></option>
+    <section class="edit-user-section">
+      <a href="/">Back to page</a>
+      <h4 class="section-title">Edit User</h4>
+      <div class="edit-form">
+        <div class="form-row row mb-3">
+          <label class="form-label col-form-label col-4" for="name">Name:</label>
+          <div class="col">
+            <input class="form-control" type="text" placeholder="Enter name" name="name" id="name" value="<%= user.name %>" required/>
+          </div>
+        </div>
+  
+        <div class="form-row row mb-3">
+          <label class="form-label col-form-label col-4"  for="email">E-mail address:</label>
+          <div class="col">
+            <input class="form-control" type="email" placeholder="Enter e-mail address" name="email" id="email" value="<%= user.email %>" required/>
+          </div>
+        </div>
+  
+        <div class="form-row row mb-3">
+          <label class="form-label col-form-label col-4" for="role">Select role:</label>
+          <div class="col">
+            <select class="form-select select-role" id="role" name="role" required>
+              <% roles.forEach(function(role){ %>
+                <% if(role === user.role) { %> 
+                  <option value="<%= role%>" selected><%= role%></option>
+                <% } else { %>
+                  <option value="<%= role%>"><%= role%></option>
+                <% } %>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+  
+        <div class="form-row row">
+          <div class="col-4">Select status:</div>
+          <div class="col">
+            <% if(user.status === 'true') { %>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="enabled" name="status" value="true" checked="true" required>
+                <label for="enabled">Enabled</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="disabled" name="status" value="false">
+                <label for="disabled">Disabled</label>
+              </div>
             <% } else { %>
-              <option value="<%= role%>"><%= role%></option>
+              <div class="form-check form-check-inline"></div>
+                <input type="radio" id="enabled" name="status" value="true" required>
+                <label for="enabled">Enabled</label>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="disabled" name="status" value="false" checked="true">
+                <label for="disabled">Disabled</label>
+              </div>
+              
             <% } %>
-          <% }) %>
-        </select>
+          </div>
+        </div>
+  
+        <button id="save-btn" class="btn btn-dark">Save</button>
       </div>
+    </section>
 
-      <div class="form-row">
-        <p>Select status:</p>
-        <% if(user.status === 'true') { %>
-          <input type="radio" id="enabled" name="status" value="true" checked="true" required>
-          <label for="enabled">Enabled</label><br>
-          <input type="radio" id="disabled" name="status" value="false">
-          <label for="disabled">Disabled</label><br>
-        <% } else { %>
-          <input type="radio" id="enabled" name="status" value="true" required>
-          <label for="enabled">Enabled</label><br>
-          <input type="radio" id="disabled" name="status" value="false" checked="true">
-          <label for="disabled">Disabled</label><br>
-        <% } %>
-      </div>
-
-      <button id="save-btn" class="btn btn-dark">Save</button>
-    </div>
   </div>
     <script src="/edit.js"></script>
   
