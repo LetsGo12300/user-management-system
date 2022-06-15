@@ -87,7 +87,7 @@ MongoClient.connect(
       users.updateOne({_id: ObjectId(req.params.id)}, {$set: newUser})
         .then(() => {
           res.status(200).send({
-            message: "User updated"
+            message: "User successfully updated!"
           })
         })
         .catch(() => {
