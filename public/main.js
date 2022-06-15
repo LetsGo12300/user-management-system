@@ -17,6 +17,15 @@ deleteButtons.forEach(deleteButton => {
         .catch(err => {
             console.log(err)
         })
+
+        // Check if table is empty
+        let table = document.getElementsByClassName('table')[0];
+        if (table.rows.length === 2){
+            // Declare no users yet in the database
+            setTimeout(() => {
+                table.innerHTML = '<div class="text-center">No users yet!</div>';
+            }, 1000);
+        }
     })
 });
 
@@ -42,5 +51,5 @@ function displayConfirmationMsg(data){
     confirmation.style.display = 'block';
     setTimeout(() => {
         confirmation.style.display = 'none';
-    }, 2500);
+    }, 2200);
 }

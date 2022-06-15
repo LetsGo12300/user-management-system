@@ -8,35 +8,40 @@
         </button>
       </div>
 
-      <div class="users-table">
-        <table class="table table-bordered table-hover">
-          <thead class="table-secondary">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Action</th>
-          </tr>
-          </thead>
-          <tbody>
-            <% users.forEach(function(user){ %>
-              <tr tr-id=<%=user._id%>>
-                  <td class="col-3"><%= user.name %></td>
-                  <td class="col-3"><%= user.email %></td>
-                  <td class="col-2"><%= user.role %></td>
-                  <td class="col-1"> 
-                    <%= user.status === 'true' ? 'Enabled': 'Disabled' %> 
-                  </td>
-                  <td class="col-2">
-                      <input type="button" class="btn btn-light btn-outline-dark btn-sm" onclick="location.href='/users/<%=user._id%>';" value="Edit" />
-                      <input type="button" class="btn btn-light btn-outline-dark delete-btn btn-sm" data-id=<%=user._id%> value="Delete" />
-                  </td>                       
-              </tr>
-           <% }); %>
-          </tbody>
-        </table>
-      </div>
+      <% if(users.length === 0){ %>
+        <div class="text-center">No users yet!</div>
+      <% } else { %>
+        <div class="users-table">
+          <table class="table table-bordered table-hover">
+            <thead class="table-secondary">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(function(user){ %>
+                <tr tr-id=<%=user._id%>>
+                    <td class="col-3"><%= user.name %></td>
+                    <td class="col-3"><%= user.email %></td>
+                    <td class="col-2"><%= user.role %></td>
+                    <td class="col-1"> 
+                      <%= user.status === 'true' ? 'Enabled': 'Disabled' %> 
+                    </td>
+                    <td class="col-2">
+                        <input type="button" class="btn btn-light btn-outline-dark btn-sm" onclick="location.href='/users/<%=user._id%>';" value="Edit" />
+                        <input type="button" class="btn btn-light btn-outline-dark delete-btn btn-sm" data-id=<%=user._id%> value="Delete" />
+                    </td>                       
+                </tr>
+             <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+
     </section>
 
     <div class="confirmation mt-3">
