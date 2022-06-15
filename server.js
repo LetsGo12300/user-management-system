@@ -106,7 +106,7 @@ MongoClient.connect(
             })
           } else {
             res.send({
-              message: "User deleted!"
+              message: "User successfully deleted!"
             })
           }
         })

@@ -105,13 +105,40 @@ div.edit-form{
 
 @keyframes show{
     0%{
-        opacity: 0%
+        opacity: 0%;
     }
     50%{
         opacity: 50%;
     }
     100%{
         opacity: 100%;
+    }
+}
+
+.tr-remove{
+    animation-name: hide-row;
+    animation-duration: 1s;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hide-row{
+    0%{
+        opacity: 100%;
+        height: 100%;
+        line-height: 100%;
+    }
+    50%{
+        height: 75%;
+    }
+    75%{
+        height: 50%;
+        line-height: 100%;
+    }
+    100%{
+        opacity: 0%;
+        height: 0%;
+        line-height: 0px;
     }
 }
 
