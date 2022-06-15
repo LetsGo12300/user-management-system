@@ -16,7 +16,7 @@ body{
 
 .content-container{
     height: 100%;
-    padding: 20px;
+    padding: 20px 40px;
 }
 
 li{
@@ -24,11 +24,16 @@ li{
 }
 
 .section-title{
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
+.view-users-section{
+    margin-top: 20px;
+}
+
 .create-user-section{
-    margin: 50px 10px;
+    margin: 30px 10px;
     max-width: 650px;
 }
 
@@ -49,7 +54,7 @@ form.create-form{
 }
 
 .edit{
-    margin-top: 100px;
+    margin-top: 80px;
     margin-bottom: 15px;
 }
 
@@ -75,6 +80,16 @@ div.edit-form{
     margin: 10px 100px;
 }
 
+.goback-link{
+    width: max-content;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+.goback-link>a{
+    text-decoration: none;
+}
+
 .footer{
     text-align: center;
     padding: 0.5rem;
@@ -92,6 +107,10 @@ div.edit-form{
 }
 
 @media (max-width: 576px){
+    .content-container{
+        padding: 10px 20px;
+    }
+
     .users-table{
         margin: 10px 5px;
     }
@@ -105,6 +124,11 @@ div.edit-form{
     }
 
     .edit{
-        margin-top: 50px;
+        margin-top: 30px;
+    }
+
+    .goback-link{
+        margin-top: 15px;
+        margin-left: 10px;
     }
 }

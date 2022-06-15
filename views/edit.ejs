@@ -1,10 +1,18 @@
 <%- include('./partials/header') %> 
   <div class="content-container">
     <section class="edit-user-section">
-      <a href="/">Back to page</a>
+      <div class="goback-link">
+        <a href="/">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" aria-hidden="true">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+          </svg>  
+          Back to page
+        </a>
+      </div>
       
-      <h4 style="text-align: center" class="section-title edit">Edit User</h4>
-      <div class="edit-form">
+      
+      <div style="text-align: center" class="section-title edit">Edit User</div>
+      <div class="edit-form shadow-sm">
         <div class="form-row row mb-3">
           <label class="form-label col-form-label col-4" for="name">Name:</label>
           <div class="col">

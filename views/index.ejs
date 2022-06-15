@@ -1,10 +1,12 @@
 <%- include('./partials/header') %> 
   <div class="content-container">
     <section class="view-users-section">
-      <h4 class="section-title d-inline-block me-2">Users</h4>
-      <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Add
-      </button>
+      <div class="d-flex justify-content-start align-items-center mb-4">
+        <div class="section-title d-inline-block me-2">Users</div>
+        <button class="badge bg-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCreateForm" aria-expanded="false" aria-controls="collapseCreateForm">
+          + Add
+        </button>
+      </div>
 
       <div class="users-table">
         <table class="table table-bordered table-hover">
@@ -37,10 +39,10 @@
       </div>
     </section>
     
-    <div class="collapse" id="collapseExample">
+    <div class="collapse" id="collapseCreateForm">
       <section class="create-user-section">
-        <h4 class="section-title">Create New User</h4>
-        <form class="create-form" action="/api/users" method="POST">
+        <div class="section-title">Create New User</div>
+        <form class="create-form shadow-sm" action="/api/users" method="POST">
           <div class="form-row row mb-3">
             <label class="form-label col-form-label col-3" for="name">Name:</label>
             <div class="col">
