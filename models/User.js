@@ -19,8 +19,7 @@ const UsersSchema = new mongoose.Schema({
     },
     status: {
         type: Boolean,
-        required: true,
-        default: true
+        required: true
     }
 });
 

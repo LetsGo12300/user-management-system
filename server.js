@@ -45,10 +45,10 @@ db.on('error', err => {
 // Read users
 app.get('/', (req, res) => {
   User.find()
-    .then((response) => {
-      res.render('index.ejs', {users: response, roles: roles})
-    })
-    .catch(error => console.error(error))
+  .then((response) => {
+    res.render('index.ejs', {users: response, roles: roles})
+  })
+  .catch(error => console.error(error))
 });
 
 // Create user
@@ -61,68 +61,70 @@ app.post('/api/users', (req, res) => {
   });
   
   newUser.save()
-    .then(() => {
-      console.log('User successfully created');
-      res.redirect('/');
-    })
-    .catch((error) => console.error(error));
+  .then(() => {
+    console.log('User successfully created');
+    res.redirect('/');
+  })
+  .catch((error) => console.error(error));
 });
 
 // Read user and pre-fill form for updating
 app.get('/users/:id', (req, res) => {
   User.findOne({_id: ObjectId(req.params.id)})
-    .then((data) => {
-      if (!data){
-        res.status(404).send('Error. User ID not found~')
-      } else res.render('edit.ejs', {user: data, roles: roles})
+  .then((data) => {
+    if (!data){
+      res.status(404).send('Error. User ID not found~')
+    } else {
+      res.render('edit.ejs', {user: data, roles: roles})
+    }
+  })
+  .catch(() => {
+    res.status(500).send({
+      message: `Internal server error. Could not find user with id ${req.params.id}`
     })
-    .catch(() => {
-      res.status(500).send({
-        message: `Internal server error. Could not find user with id ${req.params.id}`
-      })
-    })
+  })
 })
 
 // Update user
 app.put('/api/update/:id', (req, res) => {
-  const newUser = {
-    name: req.body.name,
-    email: req.body.email,
-    role: req.body.role,
-    status: req.body.status
-  };
-
-  User.updateOne({_id: ObjectId(req.params.id)}, {$set: newUser})
-    .then(() => {
-      res.status(200).send({
-        message: "User successfully updated!"
-      })
+  User.findOne({_id: ObjectId(req.params.id)})
+  .then((data) => {
+      data.name = req.body.name;
+      data.email = req.body.email;
+      data.role = req.body.role;
+      data.status = req.body.status;
+      data.save()
+  })
+  .then(() => {
+    res.status(200).send({
+      message: "User successfully updated!"
     })
-    .catch(() => {
-      res.status(500).send({
-        message: `Internal server error. Could not update user with id ${req.params.id}`
-      })
+  })
+  .catch(() => {
+    res.status(500).send({
+      message: `Internal server error. Could not update user with id ${req.params.id}`
     })
+  })
 })
 
 app.delete('/api/delete/:id', (req, res) => {
-  User.deleteOne({_id: ObjectId(req.params.id)})
-    .then((data) => {
-      if (data.deletedCount !== 1){
-        res.status(404).send({
-          message: `User with ID ${req.params.id} not found`
-        })
-      } else {
-        res.send({
-          message: "User successfully deleted!"
-        })
-      }
-    })
-    .catch(() => {
-      res.status(500).send({
-        message: `Internal server error. Could not delete user with id ${req.params.id}`
+  User.findByIdAndDelete(ObjectId(req.params.id))
+  .then((data) => {
+    if (!data){
+      res.status(404).send({
+        message: `User with ID ${req.params.id} not found`
       })
+    } else {
+      res.send({
+        message: "User successfully deleted!"
+      })
+    }
+  })
+  .catch(() => {
+    res.status(500).send({
+      message: `Internal server error. Could not delete user with id ${req.params.id}`
     })
+  })
 })
 
 app.listen(PORT, () => {
