@@ -4,8 +4,11 @@ const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
-const {format} = require('date-fns');
+const { utcToZonedTime } = require('date-fns-tz');
 const app = express();
+
+// Get timezone
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 // Require model
 const User = require('./models/User');
@@ -76,9 +79,10 @@ app.get('/users/:id', (req, res) => {
     if (!data){
       res.status(404).send('Error. User ID not found~')
     } else {
-      const date = format(data.lastUpdatedOn,'dd MMMM yyyy HH:mm aaa').toString();
+       // Convert date to equivalent zoned time
+      const date = utcToZonedTime(data.lastUpdatedOn, timezone);
       res.render('edit.ejs', {user: data, roles: roles, date: date})
-    }
+    } 
   })
   .catch(() => {
     res.status(500).send({
