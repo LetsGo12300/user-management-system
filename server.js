@@ -76,7 +76,7 @@ app.get('/users/:id', (req, res) => {
     if (!data){
       res.status(404).send('Error. User ID not found~')
     } else {
-      const date = format(data.lastUpdatedOn,'MMMM d, yyyy h:mm aaa');
+      const date = format(data.lastUpdatedOn,'dd MMMM yyyy HH:mm aaa').toString();
       res.render('edit.ejs', {user: data, roles: roles, date: date})
     }
   })
