@@ -20,6 +20,15 @@ const UsersSchema = new mongoose.Schema({
     status: {
         type: Boolean,
         required: true
+    },
+    createdOn: {
+        type: Date,
+        immutable: true,
+        default: () => Date.now()
+    },
+    lastUpdatedOn: {
+        type: Date,
+        default: () => Date.now()
     }
 });
 

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
+const {format} = require('date-fns');
 const app = express();
 
 // Require model
@@ -75,7 +76,8 @@ app.get('/users/:id', (req, res) => {
     if (!data){
       res.status(404).send('Error. User ID not found~')
     } else {
-      res.render('edit.ejs', {user: data, roles: roles})
+      const date = format(data.lastUpdatedOn,'MMMM d, yyyy h:mm aaa');
+      res.render('edit.ejs', {user: data, roles: roles, date: date})
     }
   })
   .catch(() => {
@@ -93,6 +95,7 @@ app.put('/api/update/:id', (req, res) => {
       data.email = req.body.email;
       data.role = req.body.role;
       data.status = req.body.status;
+      data.lastUpdatedOn = Date.now();
       data.save()
   })
   .then(() => {

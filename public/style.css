@@ -73,7 +73,6 @@ div.edit-form{
 
 #save-btn{
     min-width: 200px;
-    margin-top: 40px;
 }
 
 .users-table{
@@ -93,6 +92,11 @@ div.edit-form{
 .footer{
     text-align: center;
     padding: 0.5rem;
+}
+
+.date-div>p{
+    color: #334155;
+    font-size: 0.8rem;
 }
 
 .confirmation{
