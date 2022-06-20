@@ -6,6 +6,10 @@ const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const { utcToZonedTime } = require('date-fns-tz');
 const app = express();
+const dotenv = require("dotenv")
+
+// Add dotenv config
+dotenv.config()
 
 // Get timezone
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -33,7 +37,7 @@ const roles = [
 ];
 
 mongoose.connect(
-  'mongodb+srv://m001-student:m001-mongodb-basics@sandbox.53gsr.mongodb.net/UserManagementSystem?retryWrites=true&w=majority',
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@sandbox.53gsr.mongodb.net/UserManagementSystem?retryWrites=true&w=majority`,
   { useUnifiedTopology: true }
 )
 
